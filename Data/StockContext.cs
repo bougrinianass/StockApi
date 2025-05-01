@@ -6,6 +6,6 @@ namespace ApiStock.Data
     public class StockContext:DbContext
     {
         public StockContext(DbContextOptions<StockContext> options) : base(options) { }
-        public DbSet<Produit> Products { get; set; }
+        public DbSet<Produit> Produits { get; set; }
     }
 }
