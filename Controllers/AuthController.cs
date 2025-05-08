@@ -11,6 +11,12 @@ namespace ApiStock.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+        public AuthController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginModel model)
         {
@@ -18,12 +24,12 @@ namespace ApiStock.Controllers
             if (model.Username != "admin" || model.Password != "1234")
                 return Unauthorized();
 
-            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("ma_clé_secrète_ultra_sécurisée_2024!!!"));
+            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["JwtSettings:SecretKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
                 claims: new[] { new Claim(ClaimTypes.Name, model.Username) },
-                expires: DateTime.UtcNow.AddHours(1),
+                expires: DateTime.UtcNow.AddDays(20),
                 signingCredentials: creds
             );
 
