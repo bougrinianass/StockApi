@@ -1,4 +1,5 @@
 ﻿using ApiStock.Models;
+using AppGestionStockMVC.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiStock.Data
@@ -7,5 +8,7 @@ namespace ApiStock.Data
     {
         public StockContext(DbContextOptions<StockContext> options) : base(options) { }
         public DbSet<Produit> Produits { get; set; }
+        public DbSet<Commande> Commandes { get; set; }
+        public DbSet<LigneCommande> LignesCommande { get; set; }
     }
 }
