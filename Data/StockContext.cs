@@ -10,5 +10,8 @@ namespace ApiStock.Data
         public DbSet<Produit> Produits { get; set; }
         public DbSet<Commande> Commandes { get; set; }
         public DbSet<LigneCommande> LignesCommande { get; set; }
+
+        public DbSet<Client> Clients { get; set; }
+
     }
 }

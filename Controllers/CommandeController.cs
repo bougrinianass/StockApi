@@ -1,11 +1,14 @@
 ﻿using ApiStock.Data;
 using ApiStock.Models;
 using AppGestionStockMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiStock.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CommandeController : Controller
     {
         private readonly StockContext _stockContext;
@@ -14,10 +17,7 @@ namespace ApiStock.Controllers
         {
             _stockContext = stockContext;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+
 
         [HttpGet("getCommandes")]
         public async Task<ActionResult<IEnumerable<Commande>>> getCommandes()
