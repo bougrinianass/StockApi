@@ -22,7 +22,8 @@ namespace ApiStock.Controllers
         [HttpGet("getCommandes")]
         public async Task<ActionResult<IEnumerable<Commande>>> getCommandes()
         {
-            return await _stockContext.Commandes.Include(c=>c.LignesCommande).ThenInclude(lc=>lc.Produit).ToListAsync();
+            var commandes=await _stockContext.Commandes.Include(c => c.LignesCommande).ThenInclude(lc => lc.Produit).ToListAsync();
+            return Ok(commandes);
         }
 
         [HttpGet("{id}")]
